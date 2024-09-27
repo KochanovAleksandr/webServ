@@ -1,12 +1,10 @@
 package com.example.webServ;
 
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 //import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,17 +36,23 @@ public class UserController {
 		return ResponseEntity.ok(usr);
 	}
 	
-	@PostMapping(path="/users",produces = "application/json" )
-	 public String addUser(@RequestBody  Map<String, String> users)throws InterruptedException {
-        
-		Users usr = new Users();
-		
-		usr.setLogin(users.get("login"));
-		usr.setPassword(users.get("password"));
-		Thread.sleep(1000+random.nextInt(1000));
-		return usr.toString();
-    }
 
+	@PostMapping("/users")
+	public ResponseEntity<?> users(@RequestBody Map<String,String> requestBody) throws Exception {
 
+		Users responseBody = new Users();
+		responseBody.setLogin(requestBody.get("login"));
+		responseBody.setPassword(requestBody.get("password"));
 
+		if (requestBody.get("login")==null||requestBody.get("password")==null) {
+            return new ResponseEntity<>("Not Valid",HttpStatus.BAD_REQUEST);
+        }
+			return new ResponseEntity<>(responseBody,HttpStatus.OK) ;
+
+	}
 }
+
+
+
+
+
