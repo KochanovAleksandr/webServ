@@ -2,6 +2,8 @@ package com.example.webServ;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Map;
+
 public class Users {
 	//int a = 5;
 	@NotNull
@@ -21,7 +23,10 @@ public class Users {
 		
 	}
 
-	
+
+
+
+
 	public String getLogin() {
 		return login;
 	}

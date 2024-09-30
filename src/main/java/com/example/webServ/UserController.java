@@ -31,29 +31,27 @@ public class UserController {
 	
 	@PostMapping(path="/", consumes = "application/json", produces = "application/json" )
 	public ResponseEntity<Users> usr(@Valid @RequestBody Users user) throws InterruptedException {
-		String login = user.getLogin();
-		String password = user.getPassword();
-		Users usr = new Users(login, password);
+
 		Thread.sleep(1000+random.nextInt(1000));
-		return ResponseEntity.ok(usr);
+		return ResponseEntity.ok(user);
 	}
 	
 
 	@PostMapping(path="/users")
 	public ResponseEntity<?> users(@RequestBody Map<String,String> requestBody) throws InterruptedException {
-
-		Users responseBody = new Users();
-		responseBody.setLogin(requestBody.get("login"));
-		responseBody.setPassword(requestBody.get("password"));
+		System.out.println(requestBody.get("login")+"n"
+				+requestBody.get("login")+"\n"
+				+ requestBody.size());
 		Thread.sleep(1000+random.nextInt(1000));
-		if (requestBody.get("login")==null||requestBody.get("password")==null) {
+		if (requestBody.get("login")==null||requestBody.get("password")==null||requestBody.size()!=2) {
 			HashMap<String, Object> errorResponseBody = new HashMap<>();
 
-			String message = "Not Valid Date";
+			//String message = "Not Valid Date";
 			errorResponseBody.put("status code",400);
 			errorResponseBody.put("message","Not Valid Date");
             return new ResponseEntity<>(errorResponseBody,HttpStatus.BAD_REQUEST);
         }
+			Users responseBody = new Users(requestBody.get("login"), requestBody.get("password"));
 			return new ResponseEntity<>(responseBody,HttpStatus.OK) ;
 
 	}
