@@ -39,9 +39,7 @@ public class UserController {
 
 	@PostMapping(path="/users")
 	public ResponseEntity<?> users(@RequestBody Map<String,String> requestBody) throws InterruptedException {
-		System.out.println(requestBody.get("login")+"n"
-				+requestBody.get("login")+"\n"
-				+ requestBody.size());
+
 		Thread.sleep(1000+random.nextInt(1000));
 		if (requestBody.get("login")==null||requestBody.get("password")==null||requestBody.size()!=2) {
 			HashMap<String, Object> errorResponseBody = new HashMap<>();
