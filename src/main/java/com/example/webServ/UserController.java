@@ -1,6 +1,8 @@
 package com.example.webServ;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 //import org.springframework.http.HttpStatus;
@@ -37,15 +39,20 @@ public class UserController {
 	}
 	
 
-	@PostMapping("/users")
-	public ResponseEntity<?> users(@RequestBody Map<String,String> requestBody) throws Exception {
+	@PostMapping(path="/users")
+	public ResponseEntity<?> users(@RequestBody Map<String,String> requestBody) throws InterruptedException {
 
 		Users responseBody = new Users();
 		responseBody.setLogin(requestBody.get("login"));
 		responseBody.setPassword(requestBody.get("password"));
-
+		Thread.sleep(1000+random.nextInt(1000));
 		if (requestBody.get("login")==null||requestBody.get("password")==null) {
-            return new ResponseEntity<>("Not Valid",HttpStatus.BAD_REQUEST);
+			HashMap<String, Object> errorResponseBody = new HashMap<>();
+
+			String message = "Not Valid Date";
+			errorResponseBody.put("status code",400);
+			errorResponseBody.put("message","Not Valid Date");
+            return new ResponseEntity<>(errorResponseBody,HttpStatus.BAD_REQUEST);
         }
 			return new ResponseEntity<>(responseBody,HttpStatus.OK) ;
 
