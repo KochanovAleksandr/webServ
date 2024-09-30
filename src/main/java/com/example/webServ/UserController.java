@@ -45,8 +45,9 @@ public class UserController {
 			HashMap<String, Object> errorResponseBody = new HashMap<>();
 
 			//String message = "Not Valid Date";
-			errorResponseBody.put("status code",400);
-			errorResponseBody.put("message","Not Valid Date");
+			errorResponseBody.put("status",400);
+			errorResponseBody.put("error","Bad request");
+			errorResponseBody.put("message","Request body could not be read properly.");
             return new ResponseEntity<>(errorResponseBody,HttpStatus.BAD_REQUEST);
         }
 			Users responseBody = new Users(requestBody.get("login"), requestBody.get("password"));

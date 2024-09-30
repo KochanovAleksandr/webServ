@@ -2,7 +2,7 @@ package com.example.webServ;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Map;
+
 
 public class Users {
 	//int a = 5;
@@ -22,10 +22,6 @@ public class Users {
 		this.password = password;
 		
 	}
-
-
-
-
 
 	public String getLogin() {
 		return login;
