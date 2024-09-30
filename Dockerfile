@@ -9,7 +9,7 @@ RUN mvn clean package
 
 FROM openjdk:17.0.2-jdk-slim-buster
 WORKDIR /app
-COPY --from=build /app/target/webServ.jar /app
+COPY --from=build /app/target/webServ-1-0.0.1-SNAPSHOT.jar /app
 EXPOSE 8080
 ENTRYPOINT ["sh", "-c"]
-CMD ["java -jar webServ.jar"]
+CMD ["java -jar webServ-1-0.0.1-SNAPSHOT.jar"]
